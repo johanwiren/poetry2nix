@@ -175,6 +175,7 @@ pythonPackages.callPackage
         else if isLegacy then
           fetchFromLegacy
             {
+              cacert = pkgs.cacert;
               pname = name;
               inherit python;
               inherit (fileInfo) file hash;

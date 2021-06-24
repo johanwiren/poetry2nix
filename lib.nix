@@ -136,10 +136,10 @@ let
   );
 
   fetchFromLegacy = lib.makeOverridable (
-    { python, pname, url, file, hash }:
+    { cacert, python, pname, url, file, hash }:
     pkgs.runCommand file
       {
-        nativeBuildInputs = [ python ];
+        nativeBuildInputs = [ python cacert ];
         impureEnvVars = lib.fetchers.proxyImpureEnvVars;
         outputHashMode = "flat";
         outputHashAlgo = "sha256";

@@ -9,8 +9,6 @@ from urllib.parse import urlparse
 from html.parser import HTMLParser
 import urllib.request
 import shutil
-import ssl
-import os
 
 
 # Parse the legacy index page to extract the href and package names
@@ -44,9 +42,7 @@ package_filename = sys.argv[3]
 
 print("Reading index %s" % index_url)
 
-response = urllib.request.urlopen(
-    index_url,
-    context=ssl.CERT_NONE)
+response = urllib.request.urlopen(index_url)
 index = response.read()
 
 parser = Pep503()
@@ -64,9 +60,7 @@ else:
     package_url = parser.sources[package_filename]
 print("Downloading %s" % package_url)
 
-response = urllib.request.urlopen(
-    package_url,
-    context=ssl.CERT_NONE)
+response = urllib.request.urlopen(package_url)
 
 with response as r:
     shutil.copyfileobj(r, package_file)
